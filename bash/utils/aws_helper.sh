@@ -15,7 +15,7 @@ appKey()
     profile=" --profile $profile"
   fi
 
-  echo "aws kms list-aliases$profile --query \"Aliases[?AliasName=='alias/ecs/$appName'].TargetKeyId\""
+  aws kms list-aliases$profile --query \"Aliases[?AliasName=='alias/ecs/$appName'].TargetKeyId\"
 }
 
 sops()
@@ -29,7 +29,7 @@ sops()
     exit 1
   fi
 
-  echo "AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$profile sops $option -i src/main/resources/application-$profile.yml"
+  AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$profile sops $option -i src/main/resources/application-$profile.yml
 }
 
 usage()

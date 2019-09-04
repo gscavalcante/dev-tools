@@ -32,6 +32,18 @@ sops()
   AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$profile sops $option -i src/main/resources/application-$profile.yml
 }
 
+getStatus()
+{
+  profile=$1
+
+  if [ ! -z $profile ]
+  then
+    profile="--profile $profile"
+  fi
+
+  aws sts get-caller-identity $profile
+}
+
 usage()
 {
   echo "$(basename "$0") [command...]"
@@ -39,9 +51,10 @@ usage()
   echo "    -k, --get-key       show the current app key for the given profile and appName(optional)"
   echo "    -e, --encrypt       encrypt the application-*.yml for the given profile"
   echo "    -d, --decrypt       decrypt the application-*.yml for the given profile"
+  echo "    -s, --status        get the status to know if it is connected to AWS"
   echo
 
-  exit 1
+  exit 0
 }
 
 
@@ -56,6 +69,9 @@ case $1 in
     ;;
   -d | --decrypt )
     sops "-d" $2
+    ;;
+  -s | --status )
+    getStatus $2
     ;;
   -h | --help )
     usage

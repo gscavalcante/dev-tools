@@ -2,13 +2,12 @@
 
 appKey()
 {
-  appName=$1
-  profile=$2
+  profile=$1
+  appName=$2
 
   if [ -z $appName ]
   then
-    echo "App name is required for this command."
-    exit 1
+    appName=${PWD##*/}
   fi
 
   if [ ! -z $profile ]
@@ -37,7 +36,7 @@ usage()
 {
   echo "$(basename "$0") [command...]"
   echo
-  echo "    -k, --get-key       show the current app key for the given appName and profile"
+  echo "    -k, --get-key       show the current app key for the given profile and appName(optional)"
   echo "    -e, --encrypt       encrypt the application-*.yml for the given profile"
   echo "    -d, --decrypt       decrypt the application-*.yml for the given profile"
   echo

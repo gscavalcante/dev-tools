@@ -73,9 +73,6 @@ case $1 in
   -s | --status )
     getStatus $2
     ;;
-  -h | --help )
-    usage
-    ;;
   * )
-    exit 1
+    usage
 esac

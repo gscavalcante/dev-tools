@@ -15,7 +15,7 @@ appKey()
     profile=" --profile $profile"
   fi
 
-  aws kms list-aliases$profile --query \"Aliases[?AliasName=='alias/ecs/$appName'].TargetKeyId\"
+  aws kms list-aliases$profile --query "Aliases[?AliasName=='alias/ecs/$appName'].TargetKeyId"
 }
 
 sops()
@@ -29,7 +29,9 @@ sops()
     exit 1
   fi
 
-  AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$profile sops $option -i src/main/resources/application-$profile.yml
+  # There's an error that doesn't make this command to run by this script. So, just paste and execute to work
+  echo AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$profile sops $option -i src/main/resources/application-$profile.yml | xclip -r -sel clip
+  echo "Done! Paste the command and execute."
 }
 
 getStatus()

@@ -3,6 +3,10 @@ Dev Tools
 
 This is my personal configuration to use at Linux.
 
+## Requirements
+
+- [xclip](https://github.com/astrand/xclip)
+
 ## How to use?
 
 Tell your bash that you want to use this package. Add to line below to your .bashrc,
